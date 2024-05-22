@@ -1,0 +1,100 @@
+//공통클래스를 스타일순위가 낮아서 거의 !important를 넣어 우선순위를 높여준다.
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.rel{
+    position: relative !important;
+}
+.abs{
+    position: absolute !important;
+}
+
+.d-flex{
+    display: flex !important;
+}
+.jcc{
+    justify-content: center !important;
+}
+.jcb{
+    justify-content: space-between !important;
+}
+.aic{
+    align-items: center !important;
+}
+// 자주 쓰게 되는 클래스는 병합해서 쓴다(= 부트스트랩의 row , conteint)
+.flex_center{
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.flex_between{
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+
+// 커스터마이징
+#hd{
+    .gnb{
+        /////////////// 여기서부터
+        &:hover{
+            &:before{
+                height: calc(9rem + 20px);
+                // 연산자 앞/뒤로 '띄어쓰기' 무조건 필수
+                // 기호 앞/뒤로 공백이 있어야 적용이 됨
+            }
+            .gnb_li{
+                .gnb_a{
+    
+                }
+                .gnb_ul{
+                    height: calc(9rem + 20px);
+                }
+            }
+        }
+        //////////////// 여기까지가 gnb에 hover했을때의 스타일상태임
+        &:before{
+            // 메뉴뒤 전체 날개 제일 중요한 것은 position이 abs라는 것 / hd에 position를 넣어주어 기준이 되도록 했음
+            // 화면 가득 나오게 했던 것은 hd가 기준이기 때문
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 100%;
+            right: 0;
+            height: 0;
+            background-color: rgba(0,0,0,.5);
+            transition: 0.5s;
+        }
+        .gnb_li{
+            // 대메뉴 li
+            padding: 0 1rem;
+            font-size: 1.3rem;
+            // 대메뉴는 다른 것에 영향을 안받는게 좋아서 rem으로 해주기
+            line-height: 2rem;
+            .gnb_a{
+            // 대메뉴 a
+            display: block;
+            // inline 태그는 높이 지정이 안됨. 
+            font-size: 1.5rem;
+            line-height: 80px;
+            // 상단 네비바에 따로 margin이나 padding을 넣지 않고 line-height를 넣어 여백을 만들어주면 편리함.
+            // 위아래 padding을 넣어주는 느낌
+            // line-height에 상단의 height가 가장 큰 객체의 높이를 달아준다.
+            // 상단에는 100px 이하로 작업하기(공통 룰)
+            }
+            .gnb_ul{
+            // 소메뉴 포지션이 abs임
+            top: 100%;
+            left: 0;
+            min-width: 120px;
+            padding: 0 1rem;
+            height: 0;
+            overflow: hidden;
+            transition: 0.5s;
+            }
+        }
+    }
+}
